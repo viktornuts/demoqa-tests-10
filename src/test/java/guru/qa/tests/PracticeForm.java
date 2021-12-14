@@ -21,18 +21,16 @@ public class PracticeForm {
         $("#firstName").setValue("Viktor");
         $("#lastName").setValue(" Slon");
         $("#userEmail").setValue("viktornuts@gmail.com");
-        $("#gender-radio-1").doubleClick();
-
+        $("[for='gender-radio-1']").click();
         $("#userNumber").setValue("8955245541");
-
-        //$("#dateOfBirthInput").click();
-
-        //$("#react-datepicker__year-dropdown-container react-datepicker__year-dropdown-container--select").doubleClick();
-       // $("ul li:first-child(6)").click();
-       // $("#react-datepicker__month-dropdown-container react-datepicker__month-dropdown-container--select").click();
-        $("#subjectsContainer").doubleClick();
-        $("#subjectsContainer").setValue("E");
-        $("#hobbies-checkbox-1").doubleClick();
+        $("[class='subjects-auto-complete__value-container subjects-auto-complete__value-container--is-multi css-1hwfws3']").click();
+       // $("[class='css-12jo7m5 subjects-auto-complete__multi-value__label']").setValue("English");
+        $("[for='hobbies-checkbox-1']").click();
+        $("#uploadPicture").sendKeys("C:\\Users\\serdobintsev.vm\\Desktop\\Autotests\\lesson1.png");
+        $("[placeholder='Current Address']").setValue("Nikolaya Shishka 21");
+        $("[placeholder='Current Address']").scrollIntoView(true);
+        $("#state").click();
+        $("#state > div > div.css-1hwfws3 > div.css-1uccc91-singleValue").click();
 
     }
 

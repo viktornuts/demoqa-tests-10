@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class JUnit5Examples {
 
-
+    @DisplayName("New tests")
     @BeforeAll
     static void beforeAll(){
         System.out.println("This is the before method!");
@@ -29,14 +29,14 @@ public class JUnit5Examples {
 
         System.out.println("        takeScreen();");
     }
-
+    @DisplayName("My first test")
     @Test
     void firstTest() {
         System.out.println("                first test()");
         Assertions.assertTrue(true);
 
     }
-
+    @DisplayName("My second test")
     @Test
     void secondTest() {
         System.out.println("                second test()");
