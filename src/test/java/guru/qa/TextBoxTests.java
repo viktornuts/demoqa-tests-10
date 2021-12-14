@@ -22,9 +22,10 @@ public class TextBoxTests {
        $("#userEmail").setValue("viktornuts@gmail.com");
        $("#currentAddress").setValue("Nikolaya Shishka 21");
        $("[id=permanentAddress]").setValue("Voroshilova 30");
+       $("#submit").scrollIntoView(true);
        $("#submit").click();
 
-
+       $("#output #permanentAddress").scrollIntoView(true);
 
        $("#output #name").shouldHave(text("Viktor Slon"));
        $("#output #email").shouldHave(text("viktornuts@gmail.com"));
