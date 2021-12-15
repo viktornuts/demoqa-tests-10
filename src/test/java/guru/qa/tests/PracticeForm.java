@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 
+import java.io.File;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -37,7 +38,11 @@ public class PracticeForm {
         $("[for='hobbies-checkbox-1']").click();
         $("[for='hobbies-checkbox-2']").click();
 
-        $("#uploadPicture").sendKeys("C:\\Users\\serdobintsev.vm\\Desktop\\Autotests\\lesson1.png");
+        File lesson = new File("src/test/java/guru/qa/files/lesson1.png");
+       // $("#uploadPicture").uploadFile(lesson);
+        String path = lesson.getAbsolutePath();
+        $("#uploadPicture").sendKeys(path);
+
 
         $("[placeholder='Current Address']").setValue("Nikolaya Shishka 21");
         $("[placeholder='Current Address']").scrollIntoView(true);
