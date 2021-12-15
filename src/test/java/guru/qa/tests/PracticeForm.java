@@ -39,10 +39,8 @@ public class PracticeForm {
         $("[for='hobbies-checkbox-2']").click();
 
         File lesson = new File("src/test/java/guru/qa/files/lesson1.png");
-       // $("#uploadPicture").uploadFile(lesson);
         String path = lesson.getAbsolutePath();
         $("#uploadPicture").sendKeys(path);
-
 
         $("[placeholder='Current Address']").setValue("Nikolaya Shishka 21");
         $("[placeholder='Current Address']").scrollIntoView(true);
