@@ -1,12 +1,14 @@
 package guru.qa.tests;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+
+
+import static com.codeborne.selenide.Selenide.*;
+
 
 public class PracticeForm {
 
@@ -19,18 +21,34 @@ public class PracticeForm {
     void fillFromTest(){
         open("https://demoqa.com/automation-practice-form");
         $("#firstName").setValue("Viktor");
-        $("#lastName").setValue(" Slon");
+        $("#lastName").setValue("Slon");
         $("#userEmail").setValue("viktornuts@gmail.com");
         $("[for='gender-radio-1']").click();
         $("#userNumber").setValue("8955245541");
-        $("[class='subjects-auto-complete__value-container subjects-auto-complete__value-container--is-multi css-1hwfws3']").click();
-       // $("[class='css-12jo7m5 subjects-auto-complete__multi-value__label']").setValue("English");
+
+        $("#dateOfBirthInput").click();
+        $("[class='react-datepicker__month-select']").selectOption("June");
+        $("[class='react-datepicker__year-select']").selectOption("1990");
+        $("[class*='react-datepicker__day--021']").click();
+
+        $("#subjectsInput").setValue("English").pressEnter();
+        $("#subjectsInput").setValue("Maths").pressEnter();
+
         $("[for='hobbies-checkbox-1']").click();
+        $("[for='hobbies-checkbox-2']").click();
+
         $("#uploadPicture").sendKeys("C:\\Users\\serdobintsev.vm\\Desktop\\Autotests\\lesson1.png");
+
         $("[placeholder='Current Address']").setValue("Nikolaya Shishka 21");
         $("[placeholder='Current Address']").scrollIntoView(true);
-        $("#state").click();
-        $("#state > div > div.css-1hwfws3 > div.css-1uccc91-singleValue").click();
+        $("#react-select-3-input").setValue("Raj").pressEnter();
+        $("#react-select-4-input").setValue("Jaise").pressEnter();
+        $("#submit").click();
+
+        //Assert
+        $$x("//*[@class='modal-body']//td[2]").shouldHave(CollectionCondition.exactTexts(
+                "Viktor Slon", "viktornuts@gmail.com", "Male", "8955245541", "21 June,1990",
+                "English, Maths", "Sports, Reading", "lesson1.png", "Nikolaya Shishka 21", "Rajasthan Jaiselmer"));
 
     }
 
