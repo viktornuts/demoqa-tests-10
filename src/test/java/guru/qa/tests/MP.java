@@ -21,6 +21,8 @@ public class MP {
     @Test
     void fillFromTest(){
         open("https://notary-test.region-tech.ru");
+        $("html").pressEnter();
+
 
 
         $("#IDToken2").setValue("12345678");
