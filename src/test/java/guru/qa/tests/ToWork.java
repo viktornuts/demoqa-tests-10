@@ -77,10 +77,11 @@ public class ToWork {
         $("input[name='confidant_snils']").setValue("201-531-994 22");
 
         $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[6]/dd[3]/div/div/span/span")).click();
-        $("#calendar-title").click();
-        $("#calendar-title").click();
-        $("#calendar-prev-icon").click();
-        $("#calendar-prev-icon").click();
+        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[6]/dd[3]/div/div[2]/div[1]/span[2]")).click();
+        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[6]/dd[3]/div/div[2]/div[1]/span[2]")).click();
+        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[6]/dd[3]/div/div[2]/div[1]/span[1]/i")).click();
+        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[6]/dd[3]/div/div[2]/div[1]/span[1]/i")).click();
+        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[6]/dd[3]/div/div[2]/div[1]/span[1]/i")).click();
         $("[title='1990']").click();
         $("[title='Июнь']").click();
         $("[title='22 июня 1990']").click();
@@ -89,17 +90,18 @@ public class ToWork {
 
         $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[7]/dl/dd[1]/div/div/span")).click();
         $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[7]/dl/dd[1]/div/div[2]/ul/li[1]")).click();
-        $("input[name='documentNumber']").setValue("7512203313");
+        $("input[name='documentNumber']").setValue("7512 203313");
 
         $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[7]/dl/dd[3]/div/div/span/span")).click();
-        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[6]/dd[3]/div/div[2]/div[1]/span[2]")).click();
-        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[6]/dd[3]/div/div[2]/div[1]/span[2]")).click();
-        $("#calendar-prev-icon").click();
-        $("[title='2012']").click();
+        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[7]/dl/dd[3]/div/div[2]/div[1]/span[2]")).click();
+        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[7]/dl/dd[3]/div/div[2]/div[1]/span[2]")).click();
+        $("[title='2019']").click();
         $("[title='Январь']").click();
-        $("[title='22 января 2012']").click();
+        $("[title='13 января 2019']").click();
+        $("input[name='docIssuerName']").setValue("Отделением №1 УФМС России по Челябинской области");
 
-        $("#button-wrapper.success").click();
+        $(By.xpath("/html/body/div[2]/div/div/div/div[4]/ul/li[2]/button")).scrollIntoView(true);
+        $(By.xpath("/html/body/div[2]/div/div/div/div[4]/ul/li[2]/button")).click();
 
 
 
