@@ -4,7 +4,7 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
+import org.openqa.selenium.By;
 
 
 import java.io.File;
@@ -33,13 +33,15 @@ public class ToWork {
         $("[title='Март']").click();
         $("[title='5 марта 2019']").click();
 
-        $("[name='companyName']").click();
 
-        //$("input[name='mra-to'] span.datepicker-icons-wrapper").click();
-        //$("[class='calendar-title']").click();
-        //$("[title='2022']").click();
-        //$("[title='Апрель']").click();
-       // $("[title='5 апреля 2022']").click();
+
+        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[2]/dd[1]/div/div[2]/div/span/span")).click();
+        $("[class='calendar-title']").click();
+        $("[class='calendar-title']").click();
+        $("[title='2022']").click();
+        $("[title='Ноябрь']").click();
+        $("[title='22 ноября 2022']").click();
+
         $("[class='multiselect-tags-container']").scrollIntoView(true);
         $("[class='multiselect-tags-container']").click();
         $("div[class='input-wrapper'] div[class='input-element-wrapper'] input[placeholder='Введите значение']").setValue("Подписывать акты");
