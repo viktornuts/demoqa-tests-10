@@ -48,8 +48,13 @@ public class ToWork {
 
 
         $("[name='companyName']").setValue("ООО \"Рога и копыта\"");
+        $("input[name='inn']").setValue("4431602938");
+        $("input[name='kpp']").setValue("270545600");
+        $("input[name='ogrnip']").setValue("689701451573");
+        $("input[name='address']").setValue("Москва ул.Пушкина дом 1");
+        $("input[name='chief_lastName']").setValue("Петров");
+        $("input[name='chief_firstName']").setValue("Петр");
 
-        $("[class='multiselect-input-wrapper']").selectOption("Подписывать договоры");
 
 
         $("[class='react-datepicker__month-select']").selectOption("June");
