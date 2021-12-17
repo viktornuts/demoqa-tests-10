@@ -43,11 +43,11 @@ public class ToWork {
         $("[title='22 ноября 2022']").click();
 
         $("[class='multiselect-tags-container']").scrollIntoView(true);
-        $("[class='multiselect-tags-container']").click();
-        $("div[class='input-wrapper'] div[class='input-element-wrapper'] input[placeholder='Введите значение']").setValue("Подписывать акты");
-        $("div[for='checkbox-7x7up0']").click();
+        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[2]/dd[2]/div/div[1]/div")).click();
+        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[2]/dd[2]/div/div[2]/div[2]/div/ul/li[1]/div/div")).click();
 
-        $("[name='companyName']").click();
+
+        $("[name='companyName']").setValue("ООО \"Рога и копыта\"");
 
         $("[class='multiselect-input-wrapper']").selectOption("Подписывать договоры");
 
