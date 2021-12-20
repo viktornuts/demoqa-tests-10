@@ -9,17 +9,18 @@ import org.openqa.selenium.By;
 
 import java.io.File;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 public class ToWork {
 
     @BeforeAll
-    static void beforeAll(){
+    static void beforeAll() {
         Configuration.startMaximized = true;
     }
 
     @Test
-    void fillFromTest(){
+    void fillFromTest() {
 
         //Логин
 
@@ -63,7 +64,9 @@ public class ToWork {
         $("input[name='chief_middleName']").setValue("Петрович");
         $("input[name='position']").setValue("Директор по экономике");
         $("input[name='chief_inn']").setValue("476826216095");
-        $("input[name='chief_snils']").setValue("85889150482").pressEnter();
+
+        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[5]/dd[3]/ul/li[3]/div/div/input")).click();
+        $("input[name='chief_snils']").sendKeys("253 799 532 23");
 
         //Сведенеия о представителе (доверенной стороне)
 
@@ -74,7 +77,8 @@ public class ToWork {
         $("input[name='confidant_inn']").scrollIntoView(true);
 
         $("input[name='confidant_inn']").setValue("832231002384");
-        $("input[name='confidant_snils']").setValue("201-531-994 22");
+        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[6]/dd[2]/ul/li[3]/div/div/input")).click();
+        $("input[name='confidant_snils']").sendKeys("201 531 994 22");
 
         $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[6]/dd[3]/div/div/span/span")).click();
         $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[6]/dd[3]/div/div[2]/div[1]/span[2]")).click();
@@ -89,8 +93,9 @@ public class ToWork {
         //Документ удостоверяющий личность
 
         $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[7]/dl/dd[1]/div/div/span")).click();
-        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[7]/dl/dd[1]/div/div[2]/ul/li[1]")).click();
-        $("input[name='documentNumber']").setValue("7512 203313");
+        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[7]/dl/dd[1]/div/div[2]/ul/li[2]")).click();
+        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[7]/dl/dd[3]/div/div/input")).click();
+        $("input[name='documentNumber']").sendKeys("7512 203313");
 
         $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[7]/dl/dd[3]/div/div/span/span")).click();
         $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[7]/dl/dd[3]/div/div[2]/div[1]/span[2]")).click();
@@ -103,11 +108,11 @@ public class ToWork {
         $(By.xpath("/html/body/div[2]/div/div/div/div[4]/ul/li[2]/button")).scrollIntoView(true);
         $(By.xpath("/html/body/div[2]/div/div/div/div[4]/ul/li[2]/button")).click();
 
-
-
-
-
         //Assert
-
+        $(".button-wrapper.success.disabled").shouldHave(text("Отправить на регистрацию в ФНС"));
+        String MCHDnumber = $(".txt-default.txt-gray").getText();
+        System.out.println(MCHDnumber);
     }
 }
+
+
