@@ -195,17 +195,38 @@ public class ToWork {
 
     }
 
+    @Test
+    @Order(4)
+
+    void Logout() {
+
+        $(".button-wrapper.header-button.more.blank").click();
+
+
+
+    }
+
 //    @Test
-//    @Order(4)
+//    @Order(5)
 //
-//    void Logout {
+//    void LogInUl() {
 //
+//        $(".button-wrapper.header-button.more.blank").click();
 //
 //
 //
 //    }
-
-
+//
+//    @Test
+//    @Order(6)
+//
+//    void LogInIp() {
+//
+//        $(".button-wrapper.header-button.more.blank").click();
+//
+//
+//
+//    }
 
 }
 
