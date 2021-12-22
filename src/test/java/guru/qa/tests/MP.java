@@ -1,5 +1,6 @@
 package guru.qa.tests;
 
+import com.codeborne.selenide.AuthenticationType;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
@@ -20,7 +21,7 @@ public class MP {
 
     @Test
     void fillFromTest(){
-        open("https://notary-test.region-tech.ru");
+        open("https://notary-test.region-tech.ru", AuthenticationType.BASIC, "ift", "iftU$ER!");
         $("html").pressEnter();
 
 
