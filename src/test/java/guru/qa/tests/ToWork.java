@@ -105,7 +105,7 @@ public class ToWork {
 
         $("input[name='documentCode']").click();
         $("ul[class='suggestion-list'] li:nth-child(2)").click();
-        $("input[name='documentNumber']").sendKeys("7512 203313");
+        $("input[name='documentNumber']").sendKeys("7512203313");
 
         $$("[class='datepicker-calendar-icon']").get(3).click();
         $("[class='calendar-title']").click();
@@ -134,8 +134,13 @@ public class ToWork {
 
         //Assert
 
-        $("input[name='mra-from'] .invalid-message-item").shouldHave(text("Поле обязательно для заполнения"));
-//        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[2]/dd[1]/div/div[2]/span/span")).shouldHave(text("Поле обязательно для заполнения"));
+        $(".width-45.daterange-wrapper").$$(".invalid-message-item").get(0).shouldHave(text("Поле обязательно для заполнения"));
+        $(".width-45.daterange-wrapper").$$(".invalid-message-item").get(1).shouldHave(text("Поле обязательно для заполнения"));
+        $(".width-70.multiselect-checkboxes.multiselect-wrapper").$(".invalid-message-item").shouldHave(text("Поле обязательно для заполнения"));
+        $(".textarea-wrapper").$(".invalid-message-item").shouldHave(text("Поле обязательно для заполнения"));
+        $(".width-20.padding-y-none.margin-right-none").$(".invalid-message-item").shouldHave(text("Поле обязательно для заполнения"));
+        $("li[class='width-20 margin-right-none']").$(".invalid-message-item").shouldHave(text("Поле обязательно для заполнения"));
+        $("input[name='address'] + span > span").shouldHave(text("Поле обязательно для заполнения"));
 //        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[2]/dd[2]/div/span/span")).shouldHave(text("Поле обязательно для заполнения"));
 //        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[4]/dd[1]/div/span/span")).shouldHave(text("Поле обязательно для заполнения"));
 //        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[4]/dd[2]/ul/li[1]/div/span/span")).shouldHave(text("Поле обязательно для заполнения"));
