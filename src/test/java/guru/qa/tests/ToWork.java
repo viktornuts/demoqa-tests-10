@@ -2,8 +2,10 @@ package guru.qa.tests;
 
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
 
 
 import static com.codeborne.selenide.Condition.text;
@@ -41,24 +43,29 @@ public class ToWork {
     @Order(1)
     void fillFromTest() {
 
+
+
+            $("[class='datepicker-calendar-icon']").click();
+            $("[class='calendar-title']").click();
+            $("[class='calendar-title']").click();
+            $("[title='2019']").click();
+            $("[title='Март']").click();
+            $("[title='5 марта 2019']").click();
+
+            $$("[class='datepicker-calendar-icon']").get(1).click();
+            $("[class='calendar-title']").click();
+            $("[class='calendar-title']").click();
+            $("[title='2022']").click();
+            $("[title='Ноябрь']").click();
+            $("[title='22 ноября 2022']").click();
+
+
         //Главная страница сервиса МЧД - создать
         $("[class='button-wrapper success']").click();
 
         //Полномочия по доверенности
 
-        $("[class='datepicker-calendar-icon']").click();
-        $("[class='calendar-title']").click();
-        $("[class='calendar-title']").click();
-        $("[title='2019']").click();
-        $("[title='Март']").click();
-        $("[title='5 марта 2019']").click();
 
-        $$("[class='datepicker-calendar-icon']").get(1).click();
-        $("[class='calendar-title']").click();
-        $("[class='calendar-title']").click();
-        $("[title='2022']").click();
-        $("[title='Ноябрь']").click();
-        $("[title='22 ноября 2022']").click();
 
         $("[class='multiselect-tags-container']").scrollTo().click();
         $("[class='checkbox-label'] > span").click();
@@ -104,9 +111,15 @@ public class ToWork {
         //Документ удостоверяющий личность
 
         $("input[name='documentCode']").click();
-        $("ul[class='suggestion-list'] li:nth-child(2)").click();
-        $("input[name='documentNumber']").sendKeys("7512203313");
+        $("ul[class='suggestion-list'] li:nth-child(1)").click();
 
+       // webElement.sendKeys("text to send");
+
+        SelenideElement PassportEdit = $("input[name='documentNumber']");
+        actions().moveToElement(PassportEdit).click(PassportEdit).perform();
+        PassportEdit.sendKeys("7512203313");
+     //   PassportEdit.sendKeys("203313");
+     //   new Actions($("input[name='documentNumber']")).sendKeys("text to send").perform();
         $$("[class='datepicker-calendar-icon']").get(3).click();
         $("[class='calendar-title']").click();
         $("[class='calendar-title']").click();

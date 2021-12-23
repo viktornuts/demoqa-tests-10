@@ -21,8 +21,8 @@ public class MP {
 
     @Test
     void fillFromTest(){
-        open("https://notary-test.region-tech.ru", AuthenticationType.BASIC, "ift", "iftU$ER!");
-        $("html").pressEnter();
+        open("https://notary-test.region-tech.ru", AuthenticationType.BEARER, "ift", "iftU$ER!");
+
 
 
 
