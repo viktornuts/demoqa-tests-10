@@ -54,4 +54,13 @@ public class Lesson3 {
         $(".markdown-body").shouldHave(text("Using JUnit5 extend test class:")).shouldBe(visible);
 
     }
+
+    @Test
+    void dragAndDrop(){
+        open("https://the-internet.herokuapp.com/drag_and_drop");
+        $("#column-a").dragAndDropTo($("#column-b"));
+        $$("#columns > div").get(0).shouldHave(text("B"));
+        $$("#columns > div").get(1).shouldHave(text("A"));
+
+    }
 }
