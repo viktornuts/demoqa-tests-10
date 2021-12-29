@@ -53,6 +53,8 @@ public class PracticeForm {
                 "Viktor Slon", "viktornuts@gmail.com", "Male", "8955245541", "21 June,1990",
                 "English, Maths", "Sports, Reading", "lesson1.png", "Nikolaya Shishka 21", "Rajasthan Jaiselmer"));
 
+
+        // $(".table-responsive").shouldHave(text("Viktor"), text("Slon"); как 1 из вариантов
     }
 
 
