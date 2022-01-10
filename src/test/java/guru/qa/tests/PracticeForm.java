@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 
@@ -55,6 +57,8 @@ public class PracticeForm {
 
 
         // $(".table-responsive").shouldHave(text("Viktor"), text("Slon"); как 1 из вариантов
+
+        // $(".table-responsive").$(byText("Student name")).parent().shouldHave(text("Slon"));
     }
 
 

@@ -3,10 +3,13 @@ package guru.qa.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
+import guru.qa.pages.MCHD.AuthPage;
+import guru.qa.pages.MCHD.Companents.CalendarCompanents;
+import guru.qa.pages.MCHD.MCHDpage;
+import guru.qa.pages.MCHD.StartPage;
+import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
-
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
@@ -21,54 +24,29 @@ public class ToWork {
 
     }
 
-    @BeforeEach
-    void before(){
-
-        open("https://mchd-front-ui-mchd-tst.tst.cld.esphere.local");
-        $("#IDToken1").setValue("romashkaa");
-        $("#IDToken2").setValue("12345678");
-        $("[name='Login.Submit']").click();
-
-    }
-
     @AfterEach
-    void after(){
+    void after() {
         closeWebDriver();
     }
 
 
+
+    AuthPage authPage = new AuthPage();
+    StartPage startPage = new StartPage();
+    CalendarCompanents calendarCompanents = new CalendarCompanents();
+    MCHDpage mchdpage = new MCHDpage();
 
 
     @Test
     @Order(1)
     void fillFromTest() {
 
+        authPage.openPage().inputLogin("romashkaa").inputPass("12345678").login();
+        startPage.createNewMchd();
+        calendarCompanents.setDateMCHDFor();
+        calendarCompanents.setDateMCHDTo();
+        mchdpage.choisePermissions();
 
-
-            $("[class='datepicker-calendar-icon']").click();
-            $("[class='calendar-title']").click();
-            $("[class='calendar-title']").click();
-            $("[title='2019']").click();
-            $("[title='Март']").click();
-            $("[title='5 марта 2019']").click();
-
-            $$("[class='datepicker-calendar-icon']").get(1).click();
-            $("[class='calendar-title']").click();
-            $("[class='calendar-title']").click();
-            $("[title='2022']").click();
-            $("[title='Ноябрь']").click();
-            $("[title='22 ноября 2022']").click();
-
-
-        //Главная страница сервиса МЧД - создать
-        $("[class='button-wrapper success']").click();
-
-        //Полномочия по доверенности
-
-
-
-        $("[class='multiselect-tags-container']").scrollTo().click();
-        $("[class='checkbox-label'] > span").click();
 
         //Сведения о доверителе
 
@@ -113,13 +91,13 @@ public class ToWork {
         $("input[name='documentCode']").click();
         $("ul[class='suggestion-list'] li:nth-child(1)").click();
 
-       // webElement.sendKeys("text to send");
+        // webElement.sendKeys("text to send");
 
         SelenideElement PassportEdit = $("input[name='documentNumber']");
         actions().moveToElement(PassportEdit).click(PassportEdit).perform();
         PassportEdit.sendKeys("7512203313");
-     //   PassportEdit.sendKeys("203313");
-     //   new Actions($("input[name='documentNumber']")).sendKeys("text to send").perform();
+        //   PassportEdit.sendKeys("203313");
+        //   new Actions($("input[name='documentNumber']")).sendKeys("text to send").perform();
         $$("[class='datepicker-calendar-icon']").get(3).click();
         $("[class='calendar-title']").click();
         $("[class='calendar-title']").click();
@@ -140,7 +118,7 @@ public class ToWork {
     @Order(2)
     void ValidationForm() {
 
-       //Создать МЧД оставить пустыми поля нажать на "Перейти к подписанию"
+        //Создать МЧД оставить пустыми поля нажать на "Перейти к подписанию"
 
         $("[class='button-wrapper success']").click();
         $("div[class='light-box-footer'] .button-wrapper.success").scrollTo().click();
@@ -176,11 +154,10 @@ public class ToWork {
 
     @Test
     @Order(3)
-
     void ContorlSummCheck() {
 
 
-       //Проверка контрольных сумм у полей
+        //Проверка контрольных сумм у полей
         $("[class='button-wrapper success']").click();
 
         $("[name='companyName']").scrollTo();
@@ -197,7 +174,7 @@ public class ToWork {
         $(By.xpath("/html/body/div[2]/div/div/div/div[4]/ul/li[2]/button")).scrollTo().click();
 
 
-          //Assert
+        //Assert
 
         $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[4]/dd[2]/ul/li[1]/div/span/span")).shouldHave(text("Введите ИНН юридического лица"));
         $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[4]/dd[2]/ul/li[5]/div/span/span")).shouldHave(text("Введите ОГРН"));
@@ -212,11 +189,9 @@ public class ToWork {
 
     @Test
     @Order(4)
-
     void Logout() {
 
         $(".button-wrapper.header-button.more.blank").click();
-
 
 
     }
