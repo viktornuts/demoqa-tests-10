@@ -45,24 +45,9 @@ public class ToWork {
         startPage.createNewMchd();
         calendarCompanents.setDateMCHDFor();
         calendarCompanents.setDateMCHDTo();
-        mchdpage.choisePermissions();
-
-
-        //Сведения о доверителе
-
-        $("[name='companyName']").setValue("ООО \"Рога и копыта\"");
-        $("input[name='inn']").setValue("4431602938");
-        $("input[name='kpp']").setValue("270545600");
-        $("input[name='ogrnip']").setValue("6083327334755");
-        $("input[name='address']").setValue("Москва ул.Пушкина дом 1");
-        $("input[name='chief_lastName']").setValue("Доверчивый");
-        $("input[name='chief_firstName']").setValue("Петр");
-        $("input[name='chief_middleName']").setValue("Петрович");
-        $("input[name='position']").setValue("Директор по экономике");
-        $("input[name='chief_inn']").setValue("476826216095");
-
-        $("input[name='chief_snils']").click();
-        $("input[name='chief_snils']").sendKeys("253 799 532 23");
+        mchdpage.choisePermissions()
+                .setChiefInn("683224144001")
+                .setChiefSnils("253 799 532 23");
 
         //Сведенеия о представителе (доверенной стороне)
 

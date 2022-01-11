@@ -17,7 +17,7 @@ public class CalendarCompanents {
 
     public void setDateMCHDTo() {
 
-        $$("[class='datepicker-calendar-icon']").get(2).click();
+        $$("[class='datepicker-calendar-icon']").get(1).click();
         $("[class='calendar-title']").click();
         $("[class='calendar-title']").click();
         $("[title='2022']").click();
