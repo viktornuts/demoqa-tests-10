@@ -2,14 +2,19 @@ package guru.qa.tests;
 
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.logevents.SelenideLogger;
 import guru.qa.pages.MCHD.AuthPage;
 import guru.qa.pages.MCHD.Companents.CalendarCompanents;
 import guru.qa.pages.MCHD.MCHDpage;
 import guru.qa.pages.MCHD.StartPage;
-import org.checkerframework.checker.units.qual.C;
+import io.qameta.allure.Attachment;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
+
+import java.nio.charset.StandardCharsets;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
@@ -26,9 +31,11 @@ public class ToWork {
 
     @AfterEach
     void after() {
+        ToWork testWithAnatation1 = new ToWork();
+        testWithAnatation1.attachPageSource();
         closeWebDriver();
-    }
 
+    }
 
 
     AuthPage authPage = new AuthPage();
@@ -40,6 +47,7 @@ public class ToWork {
     @Test
     @Order(1)
     void fillFromTest() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
 
         authPage.openPage().inputLogin("romashkaa").inputPass("12345678").login();
         startPage.createNewMchd();
@@ -49,101 +57,44 @@ public class ToWork {
                 .setChiefInn("683224144001")
                 .setChiefSnils("253 799 532 23");
 
-        //Сведенеия о представителе (доверенной стороне)
+        mchdpage.setConfidantFirstName("Олег")
+                .setConfidantMidleName("Иванович")
+                .setConfidantLastName("Подписантов")
+                .setConfidantInn("643395448808")
+                .setConfidantSnils("201 531 994 22");
 
-        $("input[name='confidant_lastName']").setValue("Подписантов");
-        $("input[name='confidant_firstName']").setValue("Олег");
-        $("input[name='confidant_middleName']").setValue("Иванович");
+        calendarCompanents.setConfidantBirthday();
 
-        $("input[name='confidant_inn']").scrollIntoView(true);
+        mchdpage.setDocumentCode("3")
+                .setDocumentNumber("22331723144A17");
 
-        $("input[name='confidant_inn']").setValue("832231002384");
-        $("input[name='confidant_snils']").click();
-        $("input[name='confidant_snils']").sendKeys("201 531 994 22");
+        calendarCompanents.setDocumentReleaseDate();
 
-        $$("[class='datepicker-calendar-icon']").get(2).click();
-        $("[class='calendar-title']").click();
-        $("[class='calendar-title']").click();
-        $("i[class='calendar-prev-icon']").click();
-        $("i[class='calendar-prev-icon']").click();
-        $("i[class='calendar-prev-icon']").click();
-        $("[title='1990']").click();
-        $("[title='Июнь']").click();
-        $("[title='22 июня 1990']").click();
+        mchdpage.setDocumentIssure("Отделение №1 УФМС России по Челябинской области в Ордж. районе г. Магнитогорска")
+                .acceptMchd();
 
-        //Документ удостоверяющий личность
 
-        $("input[name='documentCode']").click();
-        $("ul[class='suggestion-list'] li:nth-child(1)").click();
+        mchdpage.assertCreateMchd();
 
-        // webElement.sendKeys("text to send");
-
-        SelenideElement PassportEdit = $("input[name='documentNumber']");
-        actions().moveToElement(PassportEdit).click(PassportEdit).perform();
-        PassportEdit.sendKeys("7512203313");
-        //   PassportEdit.sendKeys("203313");
-        //   new Actions($("input[name='documentNumber']")).sendKeys("text to send").perform();
-        $$("[class='datepicker-calendar-icon']").get(3).click();
-        $("[class='calendar-title']").click();
-        $("[class='calendar-title']").click();
-        $("[title='2019']").click();
-        $("[title='Январь']").click();
-        $("[title='13 января 2019']").click();
-        $("input[name='docIssuerName']").setValue("Отделением №1 УФМС России по Челябинской области");
-
-        $("div[class='light-box-footer'] .button-wrapper.success").scrollTo().click();
-
-        //Assert
-        $(".button-wrapper.success.disabled").shouldHave(text("Отправить на регистрацию в ФНС"));
-        String MCHDnumber = $(".txt-default.txt-gray").getText();
-        System.out.println(MCHDnumber);
     }
 
     @Test
     @Order(2)
     void ValidationForm() {
 
-        //Создать МЧД оставить пустыми поля нажать на "Перейти к подписанию"
-
-        $("[class='button-wrapper success']").click();
-        $("div[class='light-box-footer'] .button-wrapper.success").scrollTo().click();
-
-        //Assert
-
-        $(".width-45.daterange-wrapper").$$(".invalid-message-item").get(0).shouldHave(text("Поле обязательно для заполнения"));
-        $(".width-45.daterange-wrapper").$$(".invalid-message-item").get(1).shouldHave(text("Поле обязательно для заполнения"));
-        $(".width-70.multiselect-checkboxes.multiselect-wrapper").$(".invalid-message-item").shouldHave(text("Поле обязательно для заполнения"));
-        $(".textarea-wrapper").$(".invalid-message-item").shouldHave(text("Поле обязательно для заполнения"));
-        $(".width-20.padding-y-none.margin-right-none").$(".invalid-message-item").shouldHave(text("Поле обязательно для заполнения"));
-        $("li[class='width-20 margin-right-none']").$(".invalid-message-item").shouldHave(text("Поле обязательно для заполнения"));
-        $("input[name='address'] + span > span").shouldHave(text("Поле обязательно для заполнения"));
-//        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[2]/dd[2]/div/span/span")).shouldHave(text("Поле обязательно для заполнения"));
-//        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[4]/dd[1]/div/span/span")).shouldHave(text("Поле обязательно для заполнения"));
-//        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[4]/dd[2]/ul/li[1]/div/span/span")).shouldHave(text("Поле обязательно для заполнения"));
-//        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[4]/dd[2]/ul/li[3]/div/span/span")).shouldHave(text("Поле обязательно для заполнения"));
-//        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[4]/dd[2]/ul/li[5]/div/span/span")).shouldHave(text("Поле обязательно для заполнения"));
-//        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[4]/dd[3]/div/span/span")).shouldHave(text("Поле обязательно для заполнения"));
-//        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[5]/dd[1]/ul/li[1]/div/span/span")).shouldHave(text("Поле обязательно для заполнения"));
-//        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[5]/dd[1]/ul/li[2]/div/span/span")).shouldHave(text("Поле обязательно для заполнения"));
-//        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[5]/dd[3]/ul/li[1]/div/span/span")).shouldHave(text("Поле обязательно для заполнения"));
-//        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[5]/dd[3]/ul/li[3]/div/span/span")).shouldHave(text("Поле обязательно для заполнения"));
-//        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[6]/dd[1]/ul/li[1]/div/span/span")).shouldHave(text("Поле обязательно для заполнения"));
-//        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[6]/dd[1]/ul/li[2]/div/span/span")).shouldHave(text("Поле обязательно для заполнения"));
-//        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[7]/dl/dd[1]/div/span/span")).shouldHave(text("Поле обязательно для заполнения"));
-//        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[7]/dl/dd[2]/div/span/span")).shouldHave(text("Поле обязательно для заполнения"));
-//        $(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/dl[7]/dl/dd[3]/div/span/span")).shouldHave(text("Поле обязательно для заполнения"));
-
-        System.out.println("Валидация на обязательность заполнения полей пройдена");
+        authPage.openPage().inputLogin("romashkaa").inputPass("12345678").login();
+        startPage.createNewMchd();
+        Selenide.sleep(4000);
+        mchdpage.acceptMchd();
+        mchdpage.assertValidation();
 
     }
 
     @Test
     @Order(3)
     void ContorlSummCheck() {
-
-
-        //Проверка контрольных сумм у полей
-        $("[class='button-wrapper success']").click();
+        authPage.openPage().inputLogin("romashkaa").inputPass("12345678").login();
+        startPage.createNewMchd();
 
         $("[name='companyName']").scrollTo();
         $("input[name='inn']").setValue("4431602933");
@@ -175,8 +126,9 @@ public class ToWork {
     @Test
     @Order(4)
     void Logout() {
-
-        $(".button-wrapper.header-button.more.blank").click();
+        authPage.openPage().inputLogin("romashkaa").inputPass("12345678").login();
+        $("button[class = 'button-wrapper header-button more blank']").click();
+        $(".login-box.inner.txt-center").shouldHave(text("Войти в систему"));
 
 
     }
@@ -202,6 +154,11 @@ public class ToWork {
 //
 //
 //    }
+
+    @Attachment(value = "Screenshot", type = "text/html", fileExtension = "html")
+    public byte[] attachPageSource() {
+        return WebDriverRunner.source().getBytes(StandardCharsets.UTF_8);
+    }
 
 }
 

@@ -2,7 +2,9 @@ package guru.qa.pages.MCHD;
 
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class MCHDpage {
 
@@ -23,6 +25,13 @@ public class MCHDpage {
             confidantLastNameInput =  $("input[name='confidant_lastName']"),
             confidantFirstNameInput = $("input[name='confidant_firstName']"),
             confidantMidleNameInput = $("input[name='confidant_middleName']"),
+            confidantInnInput =  $("input[name='confidant_inn']"),
+            confidantSnilsInput =  $("input[name='confidant_snils']"),
+            documentCodeInput = $("input[name='documentCode']"),
+            documentNumbetInput = $("input[name='documentNumber']"),
+            documentIssureInput = $("input[name='docIssuerName']"),
+            successButton = $("div[class='light-box-footer'] .button-wrapper.success");
+
 
 
 
@@ -115,6 +124,65 @@ public class MCHDpage {
 
     }
 
+    public MCHDpage setConfidantInn(String value){
+        confidantInnInput.scrollIntoView(true).setValue(value);
+        return this;
 
+    }
+    public MCHDpage setConfidantSnils (String value){
+        confidantSnilsInput.click();
+        confidantSnilsInput.sendKeys(value);
+        return this;
 
+    }
+
+    public MCHDpage setDocumentCode(String value){
+        documentCodeInput.click();
+        $("ul[class='suggestion-list'] li:nth-child(" + value + ")").click();
+        return this;
+
+    }
+
+    public MCHDpage setDocumentNumber(String value) {
+        actions().moveToElement(documentNumbetInput).click(documentNumbetInput).perform();
+        documentNumbetInput.sendKeys(value);
+        return this;
+        //for pasport mask = 7512203355 (10 sim)
+    }
+
+    public MCHDpage setDocumentIssure(String value){
+        documentIssureInput.setValue(value);
+        return this;
+
+    }
+
+    public MCHDpage acceptMchd() {
+        successButton.scrollTo().click();
+        return this;
+    }
+
+    public void assertCreateMchd() {
+        $(".button-wrapper.success.disabled").shouldHave(text("Отправить на регистрацию в ФНС"));
+        String MCHDnumber = $(".txt-default.txt-gray").getText();
+        System.out.println(MCHDnumber);
+    }
+
+    public void assertValidation() {
+
+        $(".width-45.daterange-wrapper").$$(".invalid-message-item").get(0).shouldHave(text("Поле обязательно для заполнения"));
+        $(".width-45.daterange-wrapper").$$(".invalid-message-item").get(1).shouldHave(text("Поле обязательно для заполнения"));
+        $(".width-70.multiselect-checkboxes.multiselect-wrapper").$(".invalid-message-item").shouldHave(text("Поле обязательно для заполнения"));
+        $("div[class='input-wrapper'] span[class='invalid-message-list']").shouldHave(text("Поле обязательно для заполнения"));
+        $$("div[class='masked-wrapper'] span[class='invalid-message-list']").get(0).shouldHave(text("Поле обязательно для заполнения"));
+        $$("div[class='input-wrapper'] span[class='invalid-message-list']").get(0).shouldHave(text("Поле обязательно для заполнения"));
+        $$("div[class='input-wrapper'] span[class='invalid-message-list']").get(1).shouldHave(text("Поле обязательно для заполнения"));
+        $$("div[class='input-wrapper'] span[class='invalid-message-list']").get(2).shouldHave(text("Поле обязательно для заполнения"));
+        $$("div[class='input-wrapper'] span[class='invalid-message-list']").get(3).shouldHave(text("Поле обязательно для заполнения"));
+        $$("div[class='masked-wrapper'] span[class='invalid-message-list']").get(1).shouldHave(text("Поле обязательно для заполнения"));
+        $$("div[class='width-20 datepicker-wrapper'] span[class='invalid-message-list']").get(0).shouldHave(text("Поле обязательно для заполнения"));
+        $$("div[class='width-20 datepicker-wrapper'] span[class='invalid-message-list']").get(1).shouldHave(text("Поле обязательно для заполнения"));
+        $("div[class='dropdownselect-wrapper width-70'] span[class='invalid-message-list']").shouldHave(text("Поле обязательно для заполнения"));
+        $("div[class='width-45 input-wrapper'] span[class='invalid-message-list']").shouldHave(text("Поле обязательно для заполнения"));
+        System.out.println("Валидация на обязательность заполнения полей пройдена");
+    }
 }
