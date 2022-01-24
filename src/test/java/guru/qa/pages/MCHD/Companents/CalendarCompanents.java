@@ -21,8 +21,8 @@ public class CalendarCompanents {
         $("[class='calendar-title']").click();
         $("[class='calendar-title']").click();
         $("[title='2022']").click();
-        $("[title='Январь']").click();
-        $("[title='23 января 2022']").click();
+        $("[title='Март']").click();
+        $("[title='23 марта 2022']").click();
 
     }
 

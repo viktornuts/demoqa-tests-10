@@ -13,9 +13,13 @@ import io.qameta.allure.Attachment;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 
+import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -26,8 +30,10 @@ public class ToWork {
     @BeforeAll
     static void beforeAll() {
         Configuration.startMaximized = true;
-
+        Configuration.browser = "Chrome";
     }
+
+
 
     @AfterEach
     void after() {
@@ -54,8 +60,8 @@ public class ToWork {
         calendarCompanents.setDateMCHDFor();
         calendarCompanents.setDateMCHDTo();
         mchdpage.choisePermissions()
-                .setChiefInn("683224144001")
-                .setChiefSnils("253 799 532 23");
+                .setChiefInn("245723436938")
+                .setChiefSnils("130-113-771 92");
 
         mchdpage.setConfidantFirstName("Олег")
                 .setConfidantMidleName("Иванович")
@@ -75,6 +81,9 @@ public class ToWork {
 
 
         mchdpage.assertCreateMchd();
+
+        $("button[class= 'button-wrapper primary']").should(appear, Duration.ofSeconds(40)).click();
+
 
     }
 
