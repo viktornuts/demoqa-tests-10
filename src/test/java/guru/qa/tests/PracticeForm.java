@@ -5,23 +5,20 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-
 import java.io.File;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 
 public class PracticeForm {
 
     @BeforeAll
-    static void beforeAll(){
+    static void beforeAll() {
         Configuration.startMaximized = true;
     }
 
     @Test
-    void fillFromTest(){
+    void fillFromTest() {
         open("https://demoqa.com/automation-practice-form");
         $("#firstName").setValue("Viktor");
         $("#lastName").setValue("Slon");
@@ -60,7 +57,6 @@ public class PracticeForm {
 
         // $(".table-responsive").$(byText("Student name")).parent().shouldHave(text("Slon"));
     }
-
 
 
 }
