@@ -4,8 +4,12 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
+import java.net.URI;
+import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -15,6 +19,19 @@ public class PracticeForm {
     @BeforeAll
     static void beforeAll() {
         Configuration.startMaximized = true;
+//        DesiredCapabilities capabilities = new DesiredCapabilities();
+//        capabilities.setCapability("browserName", "chrome");
+//        capabilities.setCapability("browserVersion", "98.0");
+//        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+//                "enableVNC", true,
+//                "enableVideo", true
+//        ));                                                                             ------ для использования ДОКЕР и селениум на другом ПК
+//        Configuration.baseUrl = "https://demoqa.com";
+//        Configuration.browserSize = "1920x1080";
+//        Configuration.remote = "http://127.0.0.1:4444/wd/hub";
+
+
+
     }
 
     @Test

@@ -7,7 +7,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.Clock;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.given;
@@ -50,36 +52,53 @@ public class ReqresTestsWithoutPojo {
     @DisplayName("Пост запрос на успешную регистрацию, с использованием спецификации")
     public void seccessRegTest1(){
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
-        Integer id = 4;
-        String token = "QpwL5tke4Pnpja7X4";
-        Register user = new Register("eve.holt@reqres.in", "pistol");
+       Map<String, String> user = new HashMap<>();
+       user.put("email", "eve.holt@reqres.in");
+       user.put("password", "pistol");
 
-        SuccessReg successReg = given()
+        Response response = given()
                 .body(user)
                 .when()
                 .post("api/register")
                 .then().log().all()
-                .extract().as(SuccessReg.class);
-        Assertions.assertNotNull(successReg.getId());
-        Assertions.assertNotNull(successReg.getToken());
-        Assertions.assertEquals(id, successReg.getId());
-        Assertions.assertEquals(token, successReg.getToken());
+                .body("id", equalTo(4))
+                .body("token", equalTo("QpwL5tke4Pnpja7X4"))
+                .extract().response();
+
+        JsonPath jsonPath = response.jsonPath();
+        int id = jsonPath.get("id");
+        String token = jsonPath.get("token");
+        Assertions.assertEquals(4, id);
+        Assertions.assertEquals("QpwL5tke4Pnpja7X4", token);
+
+
+
+//        given()
+//                .body(user)
+//                .when()
+//                .post("api/register")
+//                .then().log().all()
+//                .body("id", equalTo(4))
+//                .body("token", equalTo("QpwL5tke4Pnpja7X4"));
+
 
     }
     @Test
     @DisplayName("Пост запрос на неуспешную регистрацию, с использованием спецификации")
     public void unseccessRegTest1(){
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecError400());
-        Register user = new Register("eve.holt@reqres.in", "");
 
-        UnSuccessReg unSuccessReg = given()
+        Map<String, String> user = new HashMap<>();
+        user.put("email", "eve.holt@reqres.in");
+        user.put("password", "");
+
+                given()
                 .body(user)
                 .when()
                 .post("api/register")
                 .then().log().all()
-                .extract().as(UnSuccessReg.class);
+                .body("error", equalTo("Missing password"));
 
-        Assertions.assertEquals("Missing password", unSuccessReg.getError());
     }
 
     @Test

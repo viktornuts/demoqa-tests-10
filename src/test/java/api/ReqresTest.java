@@ -1,13 +1,9 @@
 package api;
 
-import io.restassured.http.ContentType;
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.sql.SQLOutput;
 import java.time.Clock;
 import java.util.List;
 import java.util.stream.Collectors;

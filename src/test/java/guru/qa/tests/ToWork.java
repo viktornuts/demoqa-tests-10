@@ -164,6 +164,24 @@ public class ToWork {
 //
 //    }
 
+    @Test
+    public void DoSomeThings(){
+        open("https://alfabank.ru");
+        $(".gkY2wZ.rkY2wZ.mkY2wZ.bkY2wZ").click();
+        $("[href='/get-money/mortgage/complete_house_short/#mortgage-first-step-form']").click();
+        $(".a3IKbN.p3IKbN.y3IKbN.K3IKbN.c2iAB7.e2iAB7").shouldHave(text("Узнайте лимит по ипотеке"));
+
+    }
+
+    @Test
+    public void DoSomeThings2(){
+        open("https://alfabank.ru");
+        $("div[class='v1Cda9'] div[class='a3qH-M']").click();
+        $("input[class='c1hJsH']").setValue("Ипотека").pressEnter();
+        $("yass-div[class='b-wrapper b-wrapper_is-bem_yes i-bem b-wrapper_js_inited']").shouldHave(text("Взять ипотеку на жилье в Альфа-Банке."));
+
+    }
+
     @Attachment(value = "Screenshot", type = "text/html", fileExtension = "html")
     public byte[] attachPageSource() {
         return WebDriverRunner.source().getBytes(StandardCharsets.UTF_8);
