@@ -62,7 +62,7 @@ public class PracticeForm {
         $("[placeholder='Current Address']").scrollIntoView(true);
         $("#react-select-3-input").setValue("Raj").pressEnter();
         $("#react-select-4-input").setValue("Jaise").pressEnter();
-        $("#submit").click();
+        $("#submit").scrollTo().click();
 
         //Assert
         $$x("//*[@class='modal-body']//td[2]").shouldHave(CollectionCondition.exactTexts(
